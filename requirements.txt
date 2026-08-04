@@ -1,0 +1,4 @@
+click>=8.1
+beautifulsoup4>=4.12
+pytest>=8.0
+ruff>=0.6

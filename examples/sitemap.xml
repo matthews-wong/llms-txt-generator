@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://nimbusnotes.example/index.html</loc>
+  </url>
+  <url>
+    <loc>https://nimbusnotes.example/guides/getting-started.html</loc>
+  </url>
+  <url>
+    <loc>https://nimbusnotes.example/guides/syncing.md</loc>
+  </url>
+  <url>
+    <loc>https://nimbusnotes.example/api/overview.html</loc>
+  </url>
+  <url>
+    <loc>https://nimbusnotes.example/api/notebooks.md</loc>
+  </url>
+</urlset>

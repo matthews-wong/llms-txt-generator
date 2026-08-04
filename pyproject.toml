@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "llms-txt-generator"
+version = "0.1.0"
+description = "Generate an llms.txt file for a site from local Markdown/HTML, a sitemap, or a URL list."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "Matthews Wong" }]
+keywords = ["llms.txt", "seo", "ai", "crawlers", "static-site"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Topic :: Text Processing :: Markup",
+]
+dependencies = [
+    "click>=8.1",
+    "beautifulsoup4>=4.12",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "ruff>=0.6"]
+
+[project.scripts]
+llms-txt-generator = "llmstxt.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/matthews-wong/llms-txt-generator"
+
+[tool.setuptools.packages.find]
+include = ["llmstxt*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py39"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W", "B"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
