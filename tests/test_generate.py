@@ -65,6 +65,22 @@ def test_render_is_deterministic():
     assert out_a.index("Alpha") < out_a.index("Beta")
 
 
+def test_link_text_special_chars_are_escaped():
+    # An unescaped ']' in the label would truncate the Markdown link, so the
+    # renderer must backslash-escape the brackets and keep the note single-line.
+    pages = [
+        Page(
+            title="Guide [v2]",
+            url="/g",
+            description="Line one\nline two",
+            section="Docs",
+        ),
+    ]
+    llms_txt, _ = generate(pages, name="X")
+    assert r"- [Guide \[v2\]](/g): Line one line two" in llms_txt
+    assert "Guide [v2]" not in llms_txt  # the raw, unescaped label must not appear
+
+
 def test_ends_with_single_trailing_newline(example_site, base_url):
     pages = load_from_directory(example_site, base_url=base_url)
     llms_txt, _ = generate(pages)

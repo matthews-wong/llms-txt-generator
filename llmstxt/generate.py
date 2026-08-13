@@ -55,11 +55,28 @@ def assemble(
     return Document(name=name, summary=summary, prose=prose, sections=sections)
 
 
+def _escape_link_text(text: str) -> str:
+    """Escape characters that would break a Markdown link label.
+
+    Backslashes are escaped first, then the brackets that delimit ``[label]`` --
+    an unescaped ``]`` truncates the link text, producing invalid Markdown.
+    Newlines are collapsed so the list item stays on a single line.
+    """
+    text = text.replace("\\", "\\\\").replace("[", "\\[").replace("]", "\\]")
+    return " ".join(text.split())
+
+
+def _single_line(text: str) -> str:
+    """Collapse whitespace so a note stays part of its ``- [..](..):`` item."""
+    return " ".join(text.split())
+
+
 def _link_line(page: Page) -> str:
     """Render a single Markdown list item for a page link."""
+    title = _escape_link_text(page.title)
     if page.description:
-        return f"- [{page.title}]({page.url}): {page.description}"
-    return f"- [{page.title}]({page.url})"
+        return f"- [{title}]({page.url}): {_single_line(page.description)}"
+    return f"- [{title}]({page.url})"
 
 
 def render_llms_txt(document: Document) -> str:
